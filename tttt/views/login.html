@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <script src="../static/js/bootstrap.js"></script>
+</head>
+<body>
+
+    <div  class="vh-100 d-flex justify-content-center align-items-center container mt-3">
+     <div class="col-6 d-flex justify-content-center align-items-center bg-primary  rounded-4">
+        <form action="" class="col-9">
+            <div class="mb-3 mt-3">
+                <label for="email">电子邮件：</label>
+                <input type="email" class="form-control" id="email" placeholder="请输入电子邮件地址" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="pwd">密码：</label>
+                <input type="password" class="form-control" id="pwd" placeholder="请输入密码" name="pswd">
+            </div>
+            <div class="form-check mb-3">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="remember">记住我
+                </label>
+            </div>
+            <button type="submit" class="m-lg-1 btn btn-success float-lg-end">提交</button>
+            <button id="zhuce" type="reset" class="m-lg-1 btn btn-danger float-lg-end">注册</button>
+        </form>
+     </div>
+    </div>
+    <script>
+        document.getElementById('zhuce').onclick = function (){
+            window.location.href = 'http://localhost:8080/register';
+        }
+    </script>
+</body>
+</html>
