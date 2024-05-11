@@ -5,8 +5,9 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 	"path"
 	"tttt/models/auth"
+	database "tttt/models/database"
 	"tttt/models/msg"
-	usermodels "tttt/models/user"
+	modelsuser "tttt/models/user"
 )
 
 type Register struct {
@@ -16,11 +17,9 @@ type Register struct {
 // 用户注册
 func (c *Register) RegisterUser() {
 	c.TplName = "register.html"
-
 	defer msg.RecoverPanic()
-
 	//解析页面表单
-	user := usermodels.UserForm{}
+	user := modelsuser.UserForm{}
 	if err := c.ParseForm(&user); err != nil {
 		msg.CheckErr(err)
 	}
@@ -36,12 +35,17 @@ func (c *Register) RegisterUser() {
 	c.SaveToFile("image", imagename)
 	user.Img = imagename
 	fmt.Println(user)
+
 	m := auth.Auth(&user)
+	m1 := database.RegisterUser(&user)
 	if m.Code == 0 {
-		//注册成功后跳转至主页
-		c.Redirect("/", 302)
+		if m1.Code == 0 {
+			//注册成功后跳转至主页
+			c.Redirect("/", 302)
+		}
 	} else {
-		c.Abort(m.Msg)
+		fmt.Println(m)
+		fmt.Println(m1)
 	}
 
 }

@@ -11,6 +11,7 @@ import (
 )
 
 func init() {
+	defer msg.RecoverPanic()
 	//加载配置文件中的数据库配置
 	dbuser, user_err := beego.AppConfig.String("dbuser")
 	msg.CheckErr(user_err)
@@ -31,10 +32,10 @@ func init() {
 	//创建数据库
 	createDataBase()
 }
+func tableName() string { return "userinfo" }
+
 func createDataBase() {
 	orm.RegisterModel(new(user.User_Info))
 	tableName()
 	orm.RunSyncdb("default", false, true)
 }
-
-func tableName() string { return "userinfo" }
