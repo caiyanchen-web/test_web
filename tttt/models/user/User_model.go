@@ -11,6 +11,7 @@ type User_Info struct {
 	Name       string
 	Age        int
 	PhoneNum   string
+	Email      string
 	Gender     string
 	PassWord   string
 	Address    string
@@ -25,7 +26,8 @@ type UserForm struct {
 	Name            string `form:"name"`
 	Age             int    `form:"age"`
 	PhoneNum        string `form:"phoneNum"`
-	Gender          string `form:"optradio"`
+	Email           string `form:"email"`
+	Gender          string `form:"gender"`
 	PassWord        string `form:"pwd"`
 	ConfirmPassword string `form:"pwdok"`
 	Address         string `form:"address"`

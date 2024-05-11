@@ -4,6 +4,7 @@ import (
 	"fmt"
 	beego "github.com/beego/beego/v2/server/web"
 	"path"
+	"tttt/models/auth"
 	"tttt/models/msg"
 	usermodels "tttt/models/user"
 )
@@ -35,6 +36,12 @@ func (c *Register) RegisterUser() {
 	c.SaveToFile("image", imagename)
 	user.Img = imagename
 	fmt.Println(user)
-	//注册成功后跳转至主页
-	c.Redirect("/", 302)
+	m := auth.Auth(&user)
+	if m.Code == 0 {
+		//注册成功后跳转至主页
+		c.Redirect("/", 302)
+	} else {
+		c.Abort(m.Msg)
+	}
+
 }
