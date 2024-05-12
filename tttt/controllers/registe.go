@@ -14,38 +14,46 @@ type Register struct {
 	beego.Controller
 }
 
-// 用户注册
-func (c *Register) RegisterUser() {
+func (c *Register) Get() {
 	c.TplName = "register.html"
-	defer msg.RecoverPanic()
-	//解析页面表单
-	user := modelsuser.UserForm{}
-	if err := c.ParseForm(&user); err != nil {
-		msg.CheckErr(err)
-	}
-	//头像存放路径
-	img_path := "static/img/"
+
+}
+
+// 用户注册
+func (c *Register) Post() {
 	//上传头像
 	f, h, e1 := c.GetFile("image")
-	msg.CheckErr(e1)
 	defer f.Close()
+	//头像存放路径
+	img_path := "static/img/"
 	//拼接头像存储路径
 	imagename := path.Join(img_path, h.Filename)
 	//存储头像
 	c.SaveToFile("image", imagename)
+
+	msg.CheckErr(e1)
+
+	defer msg.RecoverPanic()
+	//解析页面表单
+	user := modelsuser.UserForm{}
 	user.Img = imagename
+	if err := c.ParseForm(&user); err != nil {
+		msg.CheckErr(err)
+	}
+
 	fmt.Println(user)
 
 	m := auth.Auth(&user)
-	m1 := database.RegisterUser(&user)
+
 	if m.Code == 0 {
+		m1 := database.RegisterUser(&user)
+		fmt.Println(m1)
 		if m1.Code == 0 {
 			//注册成功后跳转至主页
 			c.Redirect("/", 302)
 		}
 	} else {
 		fmt.Println(m)
-		fmt.Println(m1)
 	}
 
 }

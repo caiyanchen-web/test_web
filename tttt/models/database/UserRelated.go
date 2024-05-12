@@ -8,18 +8,27 @@ import (
 )
 
 func RegisterUser(u *user.UserForm) (m msg.Msg) {
-	defer msg.RecoverPanic()
+	//defer msg.RecoverPanic()
 	o1 := orm.NewOrm()
-	userInfo := u.ToUserInfo()
+	userInfo := &user.User_Info{}
+	u.ToUserInfo(userInfo)
 	fmt.Println(userInfo)
 	id, err := o1.Insert(userInfo)
-	msg.CheckErr(err)
 	if err != nil {
+		fmt.Println(id)
+	}
+	if err != nil {
+		msg.CheckErr(err)
 		m = msg.Msg{
 			Code: 501,
 			Msg:  "注册失败",
 		}
+	} else {
+		m = msg.Msg{
+			Code: 0,
+			Msg:  "注册成功",
+			Data: nil,
+		}
 	}
-	fmt.Println(id)
 	return m
 }

@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	defer msg.RecoverPanic()
+	//defer msg.RecoverPanic()
 	//加载配置文件中的数据库配置
 	dbuser, user_err := beego.AppConfig.String("dbuser")
 	msg.CheckErr(user_err)
