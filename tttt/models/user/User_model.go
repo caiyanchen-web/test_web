@@ -1,8 +1,8 @@
 package user
 
 import (
+	"golang.org/x/crypto/bcrypt"
 	"time"
-	"tttt/models/auth"
 )
 
 //用户数据库模型
@@ -35,6 +35,27 @@ type UserForm struct {
 	Img             string
 }
 
+// 获取登录表单
+type UserLogin struct {
+	Name     string `form:"name"`
+	PassWord string `form:"pwd"`
+}
+
+// HashPassword 使用 Scrypt 算法生成密码哈希值
+func HashPassWord(password string) string {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return ""
+	}
+	return string(hashedPassword)
+}
+
+// ComparePasswords 验证密码是否匹配
+func ComparePassWords(hashedPassword, password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+	return err == nil
+}
+
 // 表单数据转换为数据库模型
 func (u *UserForm) ToUserInfo(user_info *User_Info) {
 	user_info.Name = u.Name
@@ -42,7 +63,7 @@ func (u *UserForm) ToUserInfo(user_info *User_Info) {
 	user_info.PhoneNum = u.PhoneNum
 	user_info.Email = u.Email
 	user_info.Gender = u.Gender
-	user_info.PassWord = auth.HashPassWord(u.PassWord)
+	user_info.PassWord = u.PassWord
 	user_info.Address = u.Address
 	user_info.Available = true
 	user_info.Picture = u.Img

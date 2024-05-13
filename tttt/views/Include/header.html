@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>公共头部</title>
-    <link rel="stylesheet" href="/tttt/static/css/bootstrap.min.css">
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/bootstrap.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -28,8 +28,8 @@
             <form class="d-flex">
                 <input class="form-control me-2" type="text" placeholder="Search">
                 <button class="btn btn-primary me-5" type="button">Search</button>
-                <a class="navbar-brand" href="#"  data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="退出">
-                    <img src="1.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill me-3">
+                <a class="navbar-brand" href="http://localhost:8080/logout"  data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="退出">
+                    <img src="{{.image}}" alt="Avatar Logo" style="width:40px;" class="rounded-pill me-3">
                 </a>
             </form>
         </div>

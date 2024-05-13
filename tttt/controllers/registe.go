@@ -47,7 +47,6 @@ func (c *Register) Post() {
 
 	if m.Code == 0 {
 		m1 := database.RegisterUser(&user)
-		fmt.Println(m1)
 		if m1.Code == 0 {
 			//注册成功后跳转至主页
 			c.Redirect("/", 302)

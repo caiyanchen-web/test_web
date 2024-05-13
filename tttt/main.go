@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	//开启session
+	beego.BConfig.WebConfig.Session.SessionOn = true
 	//连接数据库以及初始化表
 	beego.Run()
 

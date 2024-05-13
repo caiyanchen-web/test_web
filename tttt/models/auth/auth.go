@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"golang.org/x/crypto/bcrypt"
 	"regexp"
 	"tttt/models/msg"
 	u1 "tttt/models/user"
@@ -34,8 +33,6 @@ func Auth(u *u1.UserForm) (m *msg.Msg) {
 		m = msg.NewMsg(101, "密码与确认密码不一致", nil)
 	} else if !Passwordreg.MatchString(u.PassWord) {
 		m = msg.NewMsg(401, "密码不能小于8位", nil)
-	} else if IsNull(u.Address) {
-		m = msg.NewMsg(501, "地址不能为空", nil)
 	} else if &u.Age == nil {
 		m = msg.NewMsg(502, "年龄不能为空", nil)
 	} else {
@@ -50,11 +47,4 @@ func IsNull(s string) bool {
 		return false
 	}
 	return true
-}
-
-// 密码加密
-func HashPassWord(password string) string {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	msg.CheckErr(err)
-	return string(hashedPassword)
 }
