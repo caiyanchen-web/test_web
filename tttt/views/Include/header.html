@@ -25,10 +25,10 @@
                     <a class="nav-link" href="javascript:void(0)">链接</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="text" placeholder="Search">
-                <button class="btn btn-primary me-5" type="button">Search</button>
-                <a class="navbar-brand" href="http://localhost:8080/logout"  data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="退出">
+            <form class="d-flex" action="/index" >
+                <input class="form-control me-2" type="text" placeholder="Search" name="searchname">
+                <button class="btn btn-primary me-5" type="submit">Search</button>
+                <a id="logout" class="navbar-brand" href="http://localhost:8080/logout"  data-bs-toggle="popover" data-bs-trigger="focus" onclick="logout()" data-bs-content="退出">
                     <img src="{{.image}}" alt="Avatar Logo" style="width:40px;" class="rounded-pill me-3">
                 </a>
             </form>
@@ -37,9 +37,10 @@
 </nav>
 
 <script>
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl)})
+    function logout(){
+        document.getElementById('logout').submit()
+    }
+
 </script>
 </body>
 </html>

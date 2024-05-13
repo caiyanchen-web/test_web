@@ -27,19 +27,21 @@
         </tr>
         </thead>
         <tbody>
+        {{range .Data}}
         <tr>
-            <td>1111</td>
-            <td>Bill</td>
-            <td>Gates</td>
-            <td>bill@example.com</td>
-            <td>Bill</td>
-            <td>Gates</td>
-            <td>bill@example.com</td>
+            <td>{{.Id}}</td>
+            <td>{{.Name}}</td>
+            <td>{{.Age}}</td>
+            <td>{{.Gender}}</td>
+            <td>{{.PhoneNum}}</td>
+            <td>{{.Address}}</td>
+            <td>{{.Available}}</td>
             <td>
                 <button type="button" class="btn btn-success">修改</button>
                 <button type="button" class="btn btn-danger">删除</button>
             </td>
         </tr>
+        {{end}}
         </tbody>
     </table>
 </div>

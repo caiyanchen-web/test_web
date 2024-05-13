@@ -10,6 +10,9 @@ import (
 type LoginController struct {
 	beego.Controller
 }
+type LogoutController struct {
+	beego.Controller
+}
 
 func (c *LoginController) Get() {
 	c.TplName = "login.html"
@@ -28,4 +31,9 @@ func (c *LoginController) Post() {
 		c.SetSession("user", u.Name)
 		c.Redirect("/index.html", 302)
 	}
+}
+
+func (c *LogoutController) Logout() {
+	c.DelSession("user")
+	c.Redirect("/", 302)
 }

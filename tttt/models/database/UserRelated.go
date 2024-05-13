@@ -7,6 +7,7 @@ import (
 	"tttt/models/user"
 )
 
+// 注册用户
 func RegisterUser(u *user.UserForm) (m msg.Msg) {
 	//defer msg.RecoverPanic()
 	o1 := orm.NewOrm()
@@ -59,4 +60,23 @@ func LoginUser(u *user.UserLogin) (m msg.Msg) {
 		}
 	}
 	return m
+}
+
+//展示所有用户
+
+func ListUser() []user.User_Info {
+	var userinfo []user.User_Info
+	qs := orm.NewOrm().QueryTable(new(user.User_Info))
+	_, err := qs.All(&userinfo)
+	msg.CheckErr(err)
+	return userinfo
+}
+
+// 查询用户
+func SearchUser(name string) *user.User_Info {
+	o1 := orm.NewOrm()
+	u1 := user.User_Info{Name: name}
+	err := o1.Read(&u1, "name")
+	msg.CheckErr(err)
+	return &u1
 }
