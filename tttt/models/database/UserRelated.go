@@ -72,11 +72,28 @@ func ListUser() []user.User_Info {
 	return userinfo
 }
 
-// 查询用户
-func SearchUser(name string) *user.User_Info {
+// 通过名称查询用户
+func SearchUserForName(name string) *user.User_Info {
 	o1 := orm.NewOrm()
 	u1 := user.User_Info{Name: name}
 	err := o1.Read(&u1, "name")
 	msg.CheckErr(err)
 	return &u1
+}
+
+// 通过id查询用户
+func SearchUserForId(id int) *user.User_Info {
+	o1 := orm.NewOrm()
+	u1 := user.User_Info{Id: id}
+	err := o1.Read(&u1, "id")
+	msg.CheckErr(err)
+	return &u1
+}
+
+// 更新用户信息
+func UpdateUser(u *user.User_Info) {
+	o1 := orm.NewOrm()
+
+	_, err := o1.Update(u)
+	msg.CheckErr(err)
 }
