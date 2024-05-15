@@ -11,7 +11,6 @@
 <div>
     {{template "Include/header.html" . }}
 </div>
-var ttt string
 
 <h1>用户信息</h1>
 <div class="container-fluid " >
@@ -40,7 +39,7 @@ var ttt string
             <td>{{.Available}}</td>
             <td>
                 <button type="submit" class="btn btn-success" id="btn{{.Id}}" name="username" value={{.Id}} onclick="toModify('{{.Id}}')">修改</button>
-                <button type="button" class="btn btn-danger">删除</button>
+                <button type="submit" class="btn btn-danger" id="delbtn{{.Id}}" name="username" value={{.Id}} onclick="toDelete('{{.Id}}')">删除</button>
             </td>
         </tr>
         {{end}}
@@ -54,7 +53,7 @@ var ttt string
             <td>{{.user.Available}}</td>
             <td>
                 <button type="submit" class="btn btn-success" id="btn{{.user.Id}}" name="username" value={{.user.Id}} onclick="toModify('{{.user.Id}}')">修改</button>
-                <button type="button" class="btn btn-danger">删除</button>
+                <button type="button" class="btn btn-danger" id="delbtn{{.user.Id}}" name="userid" value={{.user.Id}} onclick="toModify('{{.user.Id}}')">删除</button>
             </td>
         </tr>
         </tbody>
@@ -90,6 +89,17 @@ function toModify(index) {
         window.location.href = 'http://localhost:8080/modify?userid='+parames;
     }
 }
+
+    function toDelete(index) {
+        //点击修改按钮跳转
+        bid="delbtn"+index
+        console.log(bid)
+        document.getElementById(bid).onclick = function () {
+            //获取参数
+            var parames = this.value
+            window.location.href = 'http://localhost:8080/delete?userid='+parames;
+        }
+    }
 </script>
 </body>
 </html>

@@ -15,7 +15,7 @@
     <form  id="myForm" enctype="multipart/form-data" method="post">
         <div class="mb-3 mt-3 col-3">
             <label for="name" class="form-label ">ID：</label>
-            <input type="text" class="rounded-2 float-lg-end" id="id" value={{.userinfo.Id}} name="name">
+            <input type="text" class="rounded-2 float-lg-end" id="id" value={{.userinfo.Id}} name="id">
         </div>
         <div class="mb-3 mt-3 col-3">
             <label for="name" class="form-label ">姓名：</label>
@@ -47,11 +47,11 @@
         </div>
         <div class="mb-3  col-3">
             <label for="pwd" class="form-label">密码：</label>
-            <input type="password" class="rounded-2 float-lg-end" id="pwd" value="请输入密码" name="pwd">
+            <input type="password" class="rounded-2 float-lg-end" id="pwd" value={{.userinfo.PassWord}} name="pwd">
         </div>
         <div class="mb-3  col-3">
             <label for="pwdok" class="form-label">确认密码：</label>
-            <input type="password" class="rounded-2 float-lg-end"  id="pwdok" value="请确认密码" name="pwdok">
+            <input type="password" class="rounded-2 float-lg-end"  id="pwdok" value={{.userinfo.PassWord}} name="pwdok">
         </div>
 <!--        <div class="mb-3  col-3">-->
 <!--            <input type="file" class="form-control-file" id="image" name="image" placeholder="上传头像">-->

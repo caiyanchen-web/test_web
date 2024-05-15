@@ -7,7 +7,7 @@ import (
 
 //用户数据库模型
 
-type User_Info struct {
+type UserInfo struct {
 	Id         int `orm:"unique"`
 	Name       string
 	Age        int
@@ -17,7 +17,7 @@ type User_Info struct {
 	PassWord   string
 	Address    string
 	Available  bool
-	Picture    string
+	Picture    string    `orm:"null"`
 	CreateTime time.Time `orm:"type(datetime)"`
 	DeleteTime time.Time `orm:"type(datetime);size(255);null"`
 }
@@ -57,7 +57,7 @@ func ComparePassWords(hashedPassword, password string) bool {
 }
 
 // 表单数据转换为数据库模型
-func (u *UserForm) ToUserInfo(user_info *User_Info) {
+func (u *UserForm) ToUserInfo(user_info *UserInfo) {
 	user_info.Name = u.Name
 	user_info.Age = u.Age
 	user_info.PhoneNum = u.PhoneNum

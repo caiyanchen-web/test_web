@@ -35,7 +35,7 @@ func init() {
 func tableName() string { return "userinfo" }
 
 func createDataBase() {
-	orm.RegisterModel(new(user.User_Info))
 	tableName()
+	orm.RegisterModel(new(user.UserInfo))
 	orm.RunSyncdb("default", false, true)
 }

@@ -52,7 +52,8 @@ func (c *Register) Post() {
 			c.Redirect("/", 302)
 		}
 	} else {
-		fmt.Println(m)
+		c.Data["json"] = m.Msg
+		c.ServeJSON()
 	}
 
 }
